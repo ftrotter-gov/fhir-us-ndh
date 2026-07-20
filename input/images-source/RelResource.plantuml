@@ -9,7 +9,7 @@ agent "🏢\nOrganization\n(Healthcare System)" as orgOrgAff
 agent "🏥\nOrganization\n(Clinical Org)\n(hospital/clinic/ACO/etc)" as orgOrgPrac
 agent "🗺️\nLocation\n(Coverage Area)" as locIns 
 agent "📍\nLocation\n(Practice Location)" as locOrgPrac  
-agent "Network\n(In-network providers)" as network
+agent "🌲\nOrganization\n(Network: In-network providers)" as network
 agent HealthcareService as service
 agent InsurancePlan as insurance
 agent "👤🩺\nPractitionerRole" as pracRole
