@@ -247,6 +247,16 @@ Description:    "This profile enables NDH to represent payer and provider networ
 * identifier.assigner only Reference(NdhOrganization)
 * identifier[NPI] 0..0
 * identifier[CLIA] 0..0
+// add a slice to hold payer identification numbers (PINs) for organizations that are payers
+* identifier ^slicing.discriminator[1].type = #value
+* identifier ^slicing.discriminator[1].path = "type"
+* identifier ^slicing.rules = #open
+* identifier contains PIN 0..*
+* identifier[PIN] ^short = "Payer Identification Number"
+* identifier[PIN].type = http://terminology.hl7.org/CodeSystem/v2-0203#PAYERID
+* identifier[PIN].system 1..1 MS
+* identifier[PIN].value 1..1 MS
+
 * active 1..1 MS
 * active = true (exactly)
 * type from NetworkTypeVS (required)
@@ -302,6 +312,16 @@ Description:    "This profile enables NDH to publish authoritative organizationa
 * identifier.value MS
 * identifier.system MS
 * identifier.assigner only Reference(NdhOrganization)
+// add a slice to hold payer identification numbers (PINs) for organizations that are payers
+* identifier ^slicing.discriminator[1].type = #value
+* identifier ^slicing.discriminator[1].path = "type"
+* identifier ^slicing.rules = #open
+* identifier contains PIN 0..*
+* identifier[PIN] ^short = "Payer Identification Number"
+* identifier[PIN].type = http://terminology.hl7.org/CodeSystem/v2-0203#PAYERID
+* identifier[PIN].system 1..1 MS
+* identifier[PIN].value 1..1 MS
+
 * active 1..1 MS
 * active = true
 * type 1..* MS
@@ -387,6 +407,7 @@ Title:          "NDH Practitioner Profile"
 Description:    "This profile enables NDH to represent healthcare practitioners with verifiable identity and qualification details so consumers can discover, trust, and select individual professionals participating in care delivery and directory exchange; it adds extensions for endpoint references, accessibility, ratings, CMS-alignment indicators, verification, and communication proficiency, and applies ValueSet constraints and additional bindings for qualification, taxonomy, credential, and address-state semantics."
 * ^baseDefinition = "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner|6.1.0"
 * meta.lastUpdated 1..1
+* obeys practitioner-birthdate-year-only
 * extension contains
     USCoreRaceExtension|6.1.0 named us-core-race 0..1 and
     USCoreEthnicityExtension|6.1.0 named us-core-ethnicity 0..1 and
@@ -396,14 +417,14 @@ Description:    "This profile enables NDH to represent healthcare practitioners 
     Accessibility named accessibility 0..* and
     Rating named rating 0..* and
     CmsMedicareEnrollmentInGoodStanding named cms-medicare-enrollment-in-good-standing 0..1 and
-    CmsIdentityVerified named cms-cms-identity-verified 0..1 and
+    CmsIdentityVerified named cms-identity-verified 0..1 and
     CmsAlignedWithDataNetwork named cms-aligned-with-data-network 0..1 and
     HhsExclusionList named hhs-exclusion-list 0..1 and
     VerificationStatus named verification-status 0..1
 * extension[accessibility] ^short = "Accessibility"
 * extension[rating] ^short = "Rating"
 * extension[cms-medicare-enrollment-in-good-standing] ^short = "CMS Enrollment In Good Standing"
-* extension[cms-cms-identity-verified] ^short = "CMS Identity Verified"
+* extension[cms-identity-verified] ^short = "CMS Identity Verified"
 * extension[cms-aligned-with-data-network] ^short = "Aligned with CMS Data Network"
 * extension[hhs-exclusion-list] ^short = "HHS Exclusion List"
 * identifier MS
@@ -421,6 +442,7 @@ Description:    "This profile enables NDH to represent healthcare practitioners 
     $GeolocationExtension named geolocation 0..1 MS
 * address.state from http://hl7.org/fhir/us/core/ValueSet/us-core-usps-state|6.1.0 (extensible)
 * gender MS
+* birthDate ^short = "Year of birth. Publish only the year; a full birth date is more than the directory requires."
 * qualification  MS
 * qualification.extension contains 
     PractitionerQualificationScope named scope 0..1
@@ -517,20 +539,14 @@ Profile: NdhVerification
 Parent: VerificationResult
 Id: ndh-Verification
 Title: "NDH Verification"
-Description: "This profile enables NDH to capture verification provenance, status, and timing for directory data so consumers can assess trust, recency, and validation method when making decisions based on published provider, organization, and role information; it adds CMS-focused verification extensions and applies ValueSet bindings for validation type, process, primary-source type, and communication method to normalize attestation workflows."
+Description: "This profile enables NDH to capture verification provenance, status, and timing for directory data so consumers can assess trust, recency, and validation method when making decisions based on published provider, organization, and role information; it applies ValueSet bindings for validation type, process, primary-source type, and communication method to normalize attestation workflows."
 * ^date = "2023-01-22T12:42:47.483-05:00"
 * ^status = #active
 * . ^short = "Verification"
 * . ^definition = "Describes Verification requirements, source(s), status and dates for one or more elements"
-* extension contains
-   CmsMedicareEnrollmentInGoodStanding named cms-medicare-enrollment-in-good-standing 0..1 and
-   CmsIdentityVerified named cms-cms-identity-verified 0..1
-* extension[cms-medicare-enrollment-in-good-standing] ^short = "CMS Enrollment In Good Standing"
-* extension[cms-cms-identity-verified] ^short = "CMS Identity Verified"
 * target 1..* MS
 * target ^short = "The resource instance was verified or attested"
-* targetLocation MS
-* targetLocation ^short = "The fhirpath location(s) within the resource instance that was verified or attested"
+* targetLocation 0..0
 * need 1..1 MS
 * status MS
 * statusDate 1..1 MS

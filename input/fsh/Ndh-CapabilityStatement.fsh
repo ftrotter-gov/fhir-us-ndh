@@ -59,7 +59,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("status", Endpoint-status, #token, #SHALL,"Endpoint status")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrieve more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
-
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 //======================================================
 // HealthcareService
@@ -119,6 +123,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("specialty", HealthcareService-specialty, #token, #SHALL,"Specialties handled by the HealthcareService")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 //======================================================
 // InsurancePlan
@@ -169,6 +178,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("type", InsurancePlan-type, #token, #SHOULD, "InsurancePlan type")
     * insert SearchParam("_id", Resource-id, #token, #SHOULD, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHOULD, "Allows filtering for only records that have changed since last query.")
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 //======================================================
 // Location
@@ -219,6 +233,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("type", Location-type, #token, #SHALL, "Location type")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 //======================================================
 // Organization
@@ -280,13 +299,19 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("address-state", Organization-address-state, #string, #SHALL, "Organization address-state")
     * insert SearchParam("address-use", Organization-address-use, #token, #SHALL, "Organization address-use")
     * insert SearchParam("endpoint", Organization-endpoint, #reference, #SHALL, "Organization endpoint")
-    * insert SearchParam("identifier", Organization-identifier, #token, #SHALL, "Organization identifier")
     * insert SearchParam("name", Organization-name, #string, #SHALL, "Organization name")
     * insert SearchParam("partof", Organization-partof, #reference, #SHALL, "Organization partof")
     * insert SearchParam("type", Organization-type, #token, #SHALL, "Organization type")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
-  
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
+    * insert SearchParam("identifier", Organization-identifier, #token, #SHALL, "Organization identifier")
+    * searchParam[=].definition = Canonical(organization-identifier-oftype) // override the R4 definition.
+    * searchParam[=].documentation = "Organization identifier of a specific type. This adds the :of-type modifier to the identifier search parameter, allowing for filtering by a specific identifier type."
 
 //======================================================
 // OrganizationAffiliation
@@ -336,6 +361,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("specialty", OrganizationAffiliation-specialty, #token, #SHALL, "OrganizationAffiliation specialty")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 //======================================================
 // Practitioner
@@ -385,6 +415,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("identifier", Practitioner-identifier, #token, #SHALL, "A practitioner's Identifier")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 //======================================================
 // PractitionerRole
@@ -439,7 +474,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("specialty", PractitionerRole-specialty, #token, #SHALL, "The practitioner has this specialty at an organization")
     * insert SearchParam("_id", Resource-id, #token, #SHALL, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHALL, "Allows filtering for only records that have changed since last query.")
-
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 
 
 //======================================================
@@ -468,7 +507,11 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParamNdh("target", verificationresult-target, #reference, #MAY, "VerificationResult target")
     * insert SearchParam("_id", Resource-id, #token, #MAY, "Logical id allows to retrive more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #MAY, "Allows filtering for only records that have changed since last query.")
-
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
 //======================================================
 // Group
 //======================================================
@@ -494,3 +537,9 @@ The NDH Server SHALL be protected using TLS in accordance with [BCP 195](https:/
     * insert SearchParam("code", Group-code, #token, #SHOULD, "Group code")
     * insert SearchParam("_id", Resource-id, #token, #SHOULD, "Logical id allows to retrieve more than one in a single call")
     * insert SearchParam("_lastUpdated", Resource-lastUpdated, #date, #SHOULD, "Allows filtering for only records that have changed since last query.")
+
+    * searchParam[+]
+      * extension[http://hl7.org/fhir/StructureDefinition/capabilitystatement-expectation].valueCode = #SHALL
+      * name = "_count"
+      * type = #special
+      * documentation = "Servers SHALL support the _count parameter for paging."
