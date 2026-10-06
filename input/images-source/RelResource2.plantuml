@@ -29,7 +29,7 @@ agent Endpoint as endpoint <<Endpoint>> [[StructureDefinition-ndh-Endpoint.html{
 agent HealthcareService as healthcareService <<HealthcareService>> [[StructureDefinition-ndh-HealthcareService.html{NDH HealthcareService profile}]]
 agent InsurancePlan as insurance <<InsurancePlan>> [[StructureDefinition-ndh-InsurancePlan.html{NDH InsurancePlan profile}]]
 agent Location as location <<Location>> [[StructureDefinition-ndh-Location.html{NDH Location profile}]]
-agent Network as network <<Network>> [[StructureDefinition-ndh-Network.html{NDH Network profile}]]
+agent Organization as network <<Network>> [[StructureDefinition-ndh-Network.html{NDH Network profile}]]
 agent Organization as organization <<Organization>> [[StructureDefinition-ndh-Organization.html{NDH Organization profile}]]
 agent OrganizationAffiliation as organizationaffiliation <<OrganizationAffiliation>> [[StructureDefinition-ndh-OrganizationAffiliation.html{NDH OrganizationAffiliation profile}]]
 agent Group as group <<Group>> [[StructureDefinition-ndh-Group.html{NDH Group profile}]]
